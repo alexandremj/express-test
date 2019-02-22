@@ -22,6 +22,14 @@ app.get('/api/posts', (req, res) => {
     res.send(posts);
 })
 
+// Show single post
+app.get('/api/posts/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const post = posts.find(p => p.id === id);
+    if (!post) res.status(404).send("The post with the given ID was not found");
+    res.send(post);
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
